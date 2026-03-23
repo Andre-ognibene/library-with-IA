@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+/* 1. Recriando o Laranja da Hodie no Tailwind v4 */
+@theme {
+  --color-brand: #FF6B00;
+}
+
+/* 2. Ensinando o Tailwind v4 a obedecer o nosso botão de Modo Escuro */
+@custom-variant dark (&:where(.dark, .dark *));

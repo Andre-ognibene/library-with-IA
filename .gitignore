@@ -1,0 +1,13 @@
+# Ignorar dependências do React
+node_modules/
+dist/
+
+# Ignorar arquivos do sistema e chaves
+.env
+.DS_Store
+
+# Ignorar lixo do Python
+__pycache__/
+*.pyc
+venv/
+env/
