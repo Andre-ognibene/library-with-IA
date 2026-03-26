@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Send, Bot, User, ArrowLeft, Loader2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
-// Recebemos uma função "onBack" para voltar para a tela principal
+
 export default function ChatFullScreen({ onBack }) {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -26,13 +26,13 @@ export default function ChatFullScreen({ onBack }) {
     setIsLoading(true);
 
     try {
-      // Pega as últimas 6 mensagens do chat para a IA "lembrar" do contexto recente
+  
       const historicoRecente = messages.slice(-6);
 
       const response = await fetch("http://127.0.0.1:5000/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        // AGORA ENVIAMOS A PERGUNTA E O HISTÓRICO JUNTOS
+     
         body: JSON.stringify({ 
           pergunta: userMessage,
           historico: historicoRecente 
