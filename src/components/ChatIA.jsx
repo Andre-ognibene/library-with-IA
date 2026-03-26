@@ -24,7 +24,7 @@ export default function ChatIA() {
     setIsLoading(true);
 
     try {
-      // O chat pequeno agora também tem MEMÓRIA!
+      
       const historicoRecente = messages.slice(-6);
       
       const response = await fetch("http://127.0.0.1:5000/chat", {
@@ -66,7 +66,7 @@ export default function ChatIA() {
     );
   }
 
-  // Se estiver aberto, mostra a janela do chat
+  
   return (
     <div className="fixed bottom-8 right-8 w-[380px] h-[550px] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-2xl flex flex-col z-50 overflow-hidden transition-colors duration-300">
       
@@ -84,7 +84,7 @@ export default function ChatIA() {
         </button>
       </header>
 
-      {/* Mensagens (Estilo WhatsApp/Balões) */}
+      {/* Mensagens*/}
       <main className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar bg-white dark:bg-zinc-950">
         {messages.map((msg, index) => (
           <div key={index} className={`flex gap-3 ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
