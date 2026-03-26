@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import { Download } from "lucide-react";
 import Sidebar from "./components/Sidebar";
 import ChatIA from "./components/ChatIA";
-import "./index.css";
+import ChatFullScreen from "./components/ChatFullScreen";
 
 const MODULOS = [
   { id: 1, titulo: "Hodie", desc: "Suíte modular de monitoramento logístico.", textoPrevio: "O HODIE é uma suíte modular que controla os processos logísticos, desde a colocação do pedido, até a entrega ou devolução. É a mais completa suíte de aplicativos para controle e monitoramento de entregas.", docs: [{ nome: "manual_do_hodie.pdf" }] },
-  { id: 2, titulo: "Hodie Reversa", desc: "Gestão inteligente de devoluções e logística reversa.", textoPrevio: "O Hodie Reversa é um sistema completo para controle e visibilidade das solicitações de devolução, capaz de direcionar cada solicitação para fluxos customizáveis com etapas específicas, restrições e controles. Desde a solicitação do cliente até a destinação final do produto.", docs: [{ nome: "setup_reversa.pdf" }] },
-  { id: 3, titulo: "Hodie Booking", desc: "Agendamento e reserva de janelas de carga/descarga.", textoPrevio: "O Hodie Booking é um portal Web responsável pelo controle de docas e pátios, agendamentos e monitoramento das cargas e controle de transferências entre centros de distribuição. É uma solução completa para otimizar o fluxo de veículos e cargas na sua operação.", docs: ["booking_docs.pdf"] },
-  { id: 4, titulo: "Gateway", desc: "Integração e barramento de dados entre sistemas.", textoPrevio: "A ponte de comunicação que conecta o ecossistema Hodie com ERPs externos.", docs: [{ nome: "api_gateway.pdf" }] },
+  { id: 2, titulo: "Hodie Reversa", desc: "Gestão inteligente de devoluções e logística reversa.", textoPrevio: "O Hodie Reversa é um sistema completo para controle e visibilidade das solicitações de devolução, capaz de direcionar cada solicitação para fluxos customizáveis com etapas específicas, restrições e controles. Desde a solicitação do cliente até a destinação final do produto.", docs: [{ nome: "Manual_Hodie_Reversa.pdf" }] },
+  { id: 3, titulo: "Hodie Booking", desc: "Agendamento e Integração entre sistemas, reserva de janelas de carga/descarga e controle de Pátio e portaria.", textoPrevio: "O Hodie Booking é um portal Web responsável pelo controle de docas e pátios, agendamentos e monitoramento das cargas e controle de transferências entre centros de distribuição. É uma solução completa para otimizar o fluxo de veículos e cargas na sua operação.", docs: ["booking_docs.pdf"] },
+  { id: 4, titulo: "Gateway", desc: "Integração de sistemas", textoPrevio: "O Hodie Gateway é uma ferramenta capaz de integrar diferentes sistemas para a coleta e transferência de dados de entregas, eventuais ocorrências de entregas, agendamentos, canhotos e anexos da nota fiscal.", docs: [{ nome: "Manual_Gateway.pdf" }] },
   { id: 5, titulo: "HodieKPI", desc: "Dashboards e indicadores de performance logística.", textoPrevio: "Transforme dados brutos em decisões estratégicas com painéis de controle dinâmicos.", docs: [{ nome: "indicadores.pdf" }] },
   { id: 6, titulo: "HodieAPP", desc: "Interface móvel para gestão de armazém e operações.", textoPrevio: "O HodieApp é um aplicativo mobile disponível para Android e iOS gratuitamente e de fácil instalação, funcionando de forma integrada ao portal HodieWeb. Todos os dados compartilhados no HodieWeb são sincronizados automaticamente no aplicativo.", docs: [{ nome: "app_v3_guia.pdf" }] },
   { id: 7, titulo: "App do motorista", desc: "Jornada do motorista e comprovantes de entrega.", textoPrevio: "O Hodie Motorista é um aplicativo disponível para Android gratuitamente e de fácil utilização, com uma interface intuitiva, simples e acessível para todos. Com ele, os motoristas podem estabelecer uma comunicação direta com o embarcador, confirmando entregas, registrando ocorrências e enviando fotos dos comprovantes em tempo real.", docs: [{ nome: "guia_motorista.pdf" }] },
@@ -22,6 +22,8 @@ export default function App() {
   const [ativo, setAtivo] = useState(MODULOS[0]);
   const [busca, setBusca] = useState("");
   
+  const [telaAtual, setTelaAtual] = useState("biblioteca");
+
   const [isDark, setIsDark] = useState(() => {
     const salvo = localStorage.getItem('theme');
     if (salvo) return salvo === 'dark';
@@ -42,15 +44,19 @@ export default function App() {
     m.titulo.toLowerCase().includes(busca.toLowerCase())
   );
 
-  return (
-    <div className="flex min-h-screen bg-white dark:bg-black text-zinc-900 dark:text-zinc-100 font-sans transition-colors duration-300">
+  if (telaAtual === "chat") {
+    return <ChatFullScreen onBack={() => setTelaAtual("biblioteca")} />;
+  }
 
-      {}
+  return (
+    <div className="flex min-h-screen bg-zinc-100 dark:bg-black text-zinc-800 dark:text-zinc-100 font-sans transition-colors duration-300">
+
       <Sidebar 
         modulos={modulosFiltrados} 
         setModuloAtivo={setAtivo} 
         isDark={isDark} 
         setIsDark={setIsDark} 
+        setTelaAtual={setTelaAtual}
       />
 
       <main className="relative flex-1 p-8 overflow-y-auto overflow-x-hidden scroll-smooth">
@@ -58,13 +64,12 @@ export default function App() {
 
         <div className="relative max-w-5xl mx-auto space-y-16">
 
-          {}
-          <header className="mb-12 pt-4">
+          <header className="mb-12 pt-4 flex justify-between items-center">
             <div className="relative w-full max-w-md">
               <input
                 value={busca}
                 onChange={(e) => setBusca(e.target.value)}
-                className="w-full bg-zinc-100/50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-full py-2 px-6 focus:ring-1 ring-brand outline-none backdrop-blur-md text-zinc-900 dark:text-zinc-100 placeholder-zinc-500"
+                className="w-full bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-full py-2 px-6 focus:ring-1 ring-brand outline-none backdrop-blur-md text-zinc-900 dark:text-zinc-100 placeholder-zinc-500 shadow-sm"
                 placeholder="Buscar nos manuais..."
               />
             </div>
@@ -79,7 +84,7 @@ export default function App() {
             </p>
           </section>
 
-          <section className="p-8 bg-zinc-50 dark:bg-zinc-900/40 rounded-3xl border border-zinc-100 dark:border-zinc-800 backdrop-blur-sm shadow-xl space-y-4 transition-colors">
+          <section className="p-8 bg-white dark:bg-zinc-900/40 rounded-3xl border border-zinc-200 dark:border-zinc-800 backdrop-blur-sm shadow-xl space-y-4 transition-colors">
             <h2 className="text-2xl font-bold tracking-tight text-brand">Descrição Técnica</h2>
             <p className="text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
               {ativo.textoPrevio}
@@ -90,7 +95,7 @@ export default function App() {
             <h2 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">Materiais Complementares</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {ativo.docs.map((doc, i) => (
-                <div key={i} className="flex items-center justify-between p-6 bg-zinc-100/30 dark:bg-zinc-900/60 rounded-2xl border border-zinc-200 dark:border-zinc-800 hover:border-brand/50 transition-all group backdrop-blur-sm">
+                <div key={i} className="flex items-center justify-between p-6 bg-white dark:bg-zinc-900/60 rounded-2xl border border-zinc-200 dark:border-zinc-800 hover:border-brand/50 transition-all group backdrop-blur-sm shadow-sm">
                   <span className="text-sm font-semibold tracking-wide text-zinc-700 dark:text-zinc-200 group-hover:text-brand transition-colors">
                     {doc.nome || doc}
                   </span>
@@ -108,7 +113,8 @@ export default function App() {
         </div>
       </main>
 
-      <ChatIA />
+     {}
+     <ChatIA/>
     </div>
   );
 }
