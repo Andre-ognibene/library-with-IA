@@ -34,24 +34,6 @@ A **Biblioteca do Hodie** é uma plataforma avançada de gestão de conhecimento
 
 ---
 
-## 📂 Estrutura de Pastas
-
-```text
-meu-projeto/
-├── backend/
-│   ├── app.py              # Servidor Flask e Lógica da IA
-│   ├── Manuais/            # PDFs de manuais gerais
-│   ├── Modulos/            # PDFs de módulos específicos
-│   
-├── src/
-│   ├── components/
-│   │   ├── Sidebar.jsx     # Menu lateral e Upload
-│   │   ├── ChatIA.jsx      # Widget de chat flutuante
-│   │   └── ChatFullScreen.jsx # Interface de chat completa
-│   ├── App.jsx             # Componente principal
-│   └── main.jsx
-└── package.json
-
 ## ⚙️ Como executar o projeto
 
 ### Backend
@@ -73,3 +55,23 @@ npm run dev
 - Busca semântica com embeddings
 - Arquitetura cliente-servidor
 - Integração com APIs de IA
+
+
+## 📂 Estrutura de Pastas
+
+```text
+meu-projeto/
+├── backend/
+│   ├── app.py              # Servidor Flask e Lógica da IA
+│   ├── Manuais/            # PDFs de manuais gerais
+│   ├── Modulos/            # PDFs de módulos específicos
+│   
+├── src/
+│   ├── components/
+│   │   ├── Sidebar.jsx     # Menu lateral e Upload
+│   │   ├── ChatIA.jsx      # Widget de chat flutuante
+│   │   └── ChatFullScreen.jsx # Interface de chat completa
+│   ├── App.jsx             # Componente principal
+│   └── main.jsx
+└── package.json
+
