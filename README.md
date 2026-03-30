@@ -51,3 +51,25 @@ meu-projeto/
 │   ├── App.jsx             # Componente principal
 │   └── main.jsx
 └── package.json
+
+## ⚙️ Como executar o projeto
+
+### Backend
+```bash
+cd backend
+pip install -r requirements.txt
+python app.py
+
+cd frontend
+npm install
+npm run dev
+
+
+```md
+## 🧪 Conceitos aplicados
+
+- Retrieval-Augmented Generation (RAG)
+- Processamento de linguagem natural (NLP)
+- Busca semântica com embeddings
+- Arquitetura cliente-servidor
+- Integração com APIs de IA
