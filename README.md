@@ -1,5 +1,5 @@
 # 📚 Biblioteca do Hodie - Assistente Inteligente (RAG)
-
+> 💡 Sistema de consulta inteligente de documentos com IA (RAG), capaz de responder perguntas com base em PDFs reais.
 A **Biblioteca do Hodie** é uma plataforma avançada de gestão de conhecimento para o Ecossistema Hodie. O sistema combina uma interface moderna para consulta de manuais logísticos com um **Bibliotecário Virtual** baseado em Inteligência Artificial, capaz de ler, compreender e responder dúvidas com base em documentos PDF reais.
 
 ---
